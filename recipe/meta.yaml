@@ -1,6 +1,6 @@
 {% set name = "inline-html" %}
-{% set version = "0.1.2" %}
-{% set sha256 = "3e23c51b7d80211b4251e811b1c6f3d98a520185e91e1a55d5761619971e3e8f" %}
+{% set version = "1.0.0" %}
+{% set sha256 = "b8291390cc7ef5337cd0eaa8ff160585a7eb67d148b32e46cb744b02d15fc5aa" %}
 
 package:
   name: {{ name|lower }}
