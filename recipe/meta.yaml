@@ -1,6 +1,6 @@
 {% set name = "inline-html" %}
-{% set version = "0.1.2" %}
-{% set sha256 = "3e23c51b7d80211b4251e811b1c6f3d98a520185e91e1a55d5761619971e3e8f" %}
+{% set version = "1.0.0" %}
+{% set sha256 = "b8291390cc7ef5337cd0eaa8ff160585a7eb67d148b32e46cb744b02d15fc5aa" %}
 
 package:
   name: {{ name|lower }}
@@ -14,7 +14,10 @@ source:
 
 build:
   number: 0
-  script: python -m pip install --no-deps --ignore-installed .
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv"
+  entry_points:
+    - inline-html = inline_html.inline_html:inline_resources
+  noarch: python
 
 requirements:
   host:
@@ -28,8 +31,6 @@ requirements:
     - lxml
 
 test:
-  # Some package might need a `test/commands` key to check CLI.
-  # List all the packages/modules that `run_test.py` imports.
   imports:
     - inline_html
   commands:
@@ -39,19 +40,15 @@ about:
   home: https://github.com/zopyx/inline-html
   license: GPL-2.0
   license_family: GPL
-  # NB: Should also be added upstream https://github.com/zopyx/inline-html/issues/2
   license_file: LICENSE.txt
   summary: >
     Python script for inlining CSS stylesheets and conversion of resources
     to data-uri.
-
-  # The remaining entries in this section are optional, but recommended
   description: |
     This script parses an input HTML and, inlines all images in <img> tags
     with data-uri, inlines all external stylesheets references using
     <link rel="stylesheet" type="text/css"...> replaces all CSS references
     to external files (url(..)) with data-uri
-  # doc_url: '<none yet>'
   dev_url: https://github.com/zopyx/inline-html
 
 extra:
