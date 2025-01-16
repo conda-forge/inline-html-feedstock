@@ -7,13 +7,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.zip
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.zip
   sha256: {{ sha256 }}
   patches:
     - setup-py.patch
 
 build:
-  number: 1000
+  number: 1001
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv"
   entry_points:
     - inline-html = inline_html.inline_html:inline_resources
@@ -21,16 +21,18 @@ build:
 
 requirements:
   host:
-    - python
+    - python {{ python_min }}
     - pip
   run:
-    - python
+    - python >={{ python_min }}
     - setuptools
     - cssutils
     - click
     - lxml
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - inline_html
   commands:
